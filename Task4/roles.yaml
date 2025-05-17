@@ -1,0 +1,45 @@
+﻿# clusterroles
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cluster-reader
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "namespaces", "deployments", "jobs"]
+  verbs: ["get", "list", "watch"] 
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cluster-administrator
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "namespaces", "deployments", "jobs", "secrets"]
+  verbs: ["create", "update", "patch", "delete", "get", "list", "watch"] 
+
+---
+
+# roles
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: development
+  name: pods-manager
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["create", "update", "patch", "delete", "get", "list"] 
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: development
+  name: secrets-manager
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["create", "update", "patch", "delete", "get", "list"]
