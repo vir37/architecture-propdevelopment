@@ -1,0 +1,35 @@
+﻿apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: nonadmin-network-policy
+  namespace: sprint7
+spec:
+  policyTypes:
+  - Ingress
+  podSelector:
+    matchLabels:
+      app: non-admin-app
+  ingress:
+  - from:
+      - podSelector:
+          matchLabels:
+            app: non-admin-app 
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: admin-network-policy
+  namespace: sprint7
+spec:
+  policyTypes:
+  - Ingress
+  podSelector:
+    matchLabels:
+      app: admin-app
+  ingress:
+  - from:
+      - podSelector:
+          matchLabels:
+            app: admin-app 
