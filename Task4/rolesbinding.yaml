@@ -1,0 +1,61 @@
+﻿# clusterrolebinding
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cluster-reader-binding
+subjects:
+- kind: User
+  name: clusterreader
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: cluster-reader
+  apiGroup: rbac.authorization.k8s.io
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cluster-administrator-binding
+subjects:
+- kind: User
+  name: clusteradministrator
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: cluster-administrator
+  apiGroup: rbac.authorization.k8s.io
+ 
+---
+
+# rolebinding
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: pods-manager-binding
+  namespace: development
+subjects:
+- kind: User
+  name: developer
+  namespace: development
+roleRef:
+  kind: Role
+  name: pod-manager
+  apiGroup: rbac.authorization.k8s.io 
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: secrets-manager-binding
+  namespace: development
+subjects:
+- kind: User
+  name: developer
+  namespace: development
+roleRef:
+  kind: Role
+  name: secrets-manager
+  apiGroup: rbac.authorization.k8s.io 
